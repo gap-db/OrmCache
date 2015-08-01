@@ -1,5 +1,5 @@
 {
-    "name": "gap-db/OrmCache",
+    "name": "gap-db/orm-cache",
     "type": "library",
     "description": "Caching for GapOrm",
     "keywords": ["orm", "database", "cache", "memcache"],

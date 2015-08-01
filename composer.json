@@ -1,0 +1,18 @@
+{
+    "name": "gap-db/OrmCache",
+    "type": "library",
+    "description": "Caching for GapOrm",
+    "keywords": ["orm", "database", "cache", "memcache"],
+    "homepage": "http://www.safanlab.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Safan Lab",
+            "homepage": "http://www.safanlab.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "gap-db/orm": "1.0.*"
+    }
+}

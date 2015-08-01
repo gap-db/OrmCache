@@ -9,9 +9,9 @@ class Configuration
     private $keyPrefix = 'gapOrmCache';
 
     /**
-     * @var string
+     * @var
      */
-    private $driver = '';
+    private $driver;
 
     /**
      * @param $params
@@ -20,7 +20,7 @@ class Configuration
         if(isset($params['prefix']) && strlen($params['prefix']) > 0)
             $this->keyPrefix = hash('sha256', $this->keyPrefix . $params['prefix']);
         if(isset($params['driver']))
-            $this->driver = $params['driver'];
+            $this->driver = new $params['driver']($this->keyPrefix);
     }
 
     /**

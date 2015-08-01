@@ -1,7 +1,6 @@
 <?php
 namespace GapOrmCache\Drivers;
 
-use GapOrmCache\DependencyInjection\Configuration;
 use Safan\Safan;
 
 class MemcacheDriver
@@ -17,10 +16,10 @@ class MemcacheDriver
     private $memcache;
 
     /**
-     * @param Configuration $config
+     * @param $prefix
      */
-    public function __construct(Configuration $config){
-        $this->prefix   = $config->getKeyPrefix();
+    public function __construct($prefix){
+        $this->prefix   = $prefix;
         $this->memcache = Safan::handler()->getObjectManager()->get('memcache');
     }
 

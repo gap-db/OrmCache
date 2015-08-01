@@ -37,7 +37,7 @@ class GapOrmCache
         if(!isset($this->drivers[$params['driver']]))
             throw new FileNotFoundException($params['driver']);
 
-        $params['driver'] = new $this->drivers[$params['driver']]($config);
+        $params['driver'] = $this->drivers[$params['driver']];
         $config->buildConfig($params);
 
         $this->config = $config;

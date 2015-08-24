@@ -1,4 +1,12 @@
 <?php
+/**
+ * This file is part of the Safan package.
+ *
+ * (c) Harut Grigoryan <ceo@safanlab.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 namespace GapOrmCache\Classes;
 
 class Repository extends RepositoryCore
@@ -13,11 +21,11 @@ class Repository extends RepositoryCore
         $key  = $this->getModel()->table() . '_' . $pk;
         $data = $this->getDriver()->get($key);
 
-        if($data){
+        if($data)
             $this->endProfiling('findByPK', $key, $data);
-        }
         else {
             $data = $this->getModel()->findByPK($pk);
+
             if(!is_null($data))
                 $this->getDriver()->set($key, $data, 60*60*24);
         }
@@ -32,7 +40,7 @@ class Repository extends RepositoryCore
      * @param array $fieldArray
      * @return array
      */
-    public function beginAllInArray($fieldName, $fieldArray = array()){
+    public function beginAllInArray($fieldName, $fieldArray = []){
         return $this->getModel()->beginAllInArray($fieldName, $fieldArray);
     }
 
@@ -94,7 +102,7 @@ class Repository extends RepositoryCore
      * @param bool $isUpdate
      * @return bool
      */
-    public function save($obj, $where = array(), $isUpdate = false){
+    public function save($obj, $where = [], $isUpdate = false){
         if(method_exists($this->getModel(), 'getPK')){
             $pk  = $obj->{$this->getModel()->getPK()->identifier()};
             $key = $this->getModel()->table() . '_' . $pk;

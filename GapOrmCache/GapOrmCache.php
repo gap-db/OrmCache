@@ -60,15 +60,18 @@ class GapOrmCache
      * @param string|boolean $repositoryClass
      * @return mixed
      */
-    public function getRepository($model, $repositoryClass = false){
+    public function getRepository($model, $repositoryClass = false)
+    {
         $modelObj = $model::instance();
 
-        if ($repositoryClass)
+        if ($repositoryClass) {
             $repositoryObj = new $repositoryClass;
-        elseif (method_exists($modelObj, 'getRepository'))
-            $repositoryObj = new $modelObj->getRepository();
-        else
+        } elseif (method_exists($modelObj, 'getRepository')) {
+            $repositoryClass = $modelObj->getRepository();
+            $repositoryObj   = new $repositoryClass;
+        } else {
             $repositoryObj = new \GapOrmCache\Classes\Repository;
+        }
 
         try {
             $repositoryObj->setModel($modelObj);

@@ -57,22 +57,23 @@ class GapOrmCache
 
     /**
      * @param $model
+     * @param string|boolean $repositoryClass
      * @return mixed
      */
-    public function getRepository($model){
+    public function getRepository($model, $repositoryClass = false){
         $modelObj = $model::instance();
 
-        if(method_exists($modelObj, 'getRepository'))
-            $repository = $modelObj->getRepository();
+        if ($repositoryClass)
+            $repositoryObj = new $repositoryClass;
+        elseif (method_exists($modelObj, 'getRepository'))
+            $repositoryObj = new $modelObj->getRepository();
         else
-            $repository = 'GapOrmCache\Classes\Repository';
+            $repositoryObj = new \GapOrmCache\Classes\Repository;
 
         try {
-            $repositoryObj = new $repository;
             $repositoryObj->setModel($modelObj);
             $repositoryObj->setDriver($this->config->getDriver());
-        }
-        catch(FileNotFoundException $e){
+        } catch (FileNotFoundException $e) {
             throw new $e($model . ' repository not found');
         }
 
